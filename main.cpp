@@ -16,12 +16,12 @@ void original_alphavit(char array_alphavit[])
 void clipping_alphavit(char array_alphavit2[],int typed_text)
 {
     int value2 = 0;
-    for(char letter2=('Z'-typed_text)+1;letter2<='Z';letter2++,value2++)
+    for(char letter2=('A'+typed_text);letter2<='Z';letter2++,value2++)
     {
         array_alphavit2[value2]=letter2;
     }
 
-    for(char letter3 = 'A';letter3<='Z'-typed_text;letter3++,value2++)
+    for(char letter3 = 'A';letter3<='A'+typed_text-1;letter3++,value2++)
     {
         array_alphavit2[value2]=letter3;
     }
@@ -93,13 +93,14 @@ int main()
     cout << "Enter the number to encrypt the alphabet: ";
     cin >> typed_text;
 
-    typed_text %= 26;
-
     if(typed_text < 0)
     {
-        return 0;
+        typed_text = (26-(-typed_text % 26));
     }
-
+    else
+    {
+        typed_text %= 26;
+    }
     clipping_alphavit(array_alphavit2,typed_text);
     cout << "Enter the text to encrypt it: ";
     cin.ignore();
